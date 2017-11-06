@@ -45,9 +45,9 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <button onClick={this.request.bind(this,14)}>2 weeks</button>
-        <button onClick={this.request.bind(this,30)}>1 month</button>
-        <button onClick={this.request.bind(this,60)}>2 months</button>
+        <button onClick={this.request.bind(this,14)}>Last 2 weeks</button>
+        <button onClick={this.request.bind(this,30)}>Last month(30 days)</button>
+        <button onClick={this.request.bind(this,60)}>Last 2 months(60 days)</button>
         <h1>Temperature over time</h1>
         <AreaChart
         xTicks={data.length}
