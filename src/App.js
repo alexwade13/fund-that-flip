@@ -12,17 +12,17 @@ class App extends Component {
 
   constructor(props){
     super(props)
-    this.request()
+    this.request(5)
     this.state = {
     }
   }
 
-  request(){
+  request(length){
     //console.log(this, "pressed", secret)
     let today = moment().day()
     let date;
-    //for loop starts on today, and gets the weather for the past 7 days
-    for (let i = today; i > today-7; i-- ){
+    //for loop starts on today, and gets the weather for the past 14 days
+    for (let i = today; i > today-length; i-- ){
       date = moment().day(i)
       console.log(date)
       DarkSkyApi.loadTime(date)
@@ -39,31 +39,26 @@ class App extends Component {
     var data=[]
     for(var i in this.state){
       data.push(this.state[i])
-      
-      console.log(moment.utc(data[0]['x']*1000).local().format("D-MMM-YY"))
     }
-    console.log(data)
-
     return (
-
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button onClick={this.request.bind(this)}>press me</button>
+        <button onClick={this.request.bind(this,14)}>2 weeks</button>
+        <button onClick={this.request.bind(this,30)}>1 month</button>
+        <button onClick={this.request.bind(this,60)}>2 months</button>
+        <h1>Temperature over time</h1>
         <AreaChart
+        xTicks={data.length}
         xType={'time'}
         axes
         grid
-        tickTimeDisplayFormat={'%d %m'}
+        tickTimeDisplayFormat={'%m/%d'}
         dataPoints
         areaColors={['purple']}
-        width={550}
-        height={550}
+        width={400}
+        height={400}
           data={[
             data
           ]}
