@@ -12,7 +12,7 @@ class App extends Component {
 
   constructor(props){
     super(props)
-    this.request(5)
+    this.request(2)
     this.state = {
     }
   }
@@ -37,17 +37,23 @@ class App extends Component {
   }
   render() {
     var data=[]
-    for(var i in this.state){
+    for(let i in this.state){
       data.push(this.state[i])
     }
+    console.log(data)
+    var table = []
+    for (let i in data) {
+      console.log(data[i])
+      table.push(<tr><th>{data[i]['x']}</th><th>{data[i]['y']}</th></tr>)
+    }
+    console.log(table)
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
         <button onClick={this.request.bind(this,14)}>Last 2 weeks</button>
-        <button onClick={this.request.bind(this,30)}>Last month(30 days)</button>
-        <button onClick={this.request.bind(this,60)}>Last 2 months(60 days)</button>
+
         <h1>Temperature over time</h1>
         <AreaChart
         xTicks={data.length}
@@ -63,6 +69,18 @@ class App extends Component {
             data
           ]}
         />
+        
+        <table>
+        <tr>
+          <th>Date</th>
+          <th>Temperature</th>
+          
+        </tr>
+
+          {table}
+        </table>
+      
+
       </div>
     );
   }
